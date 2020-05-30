@@ -1,104 +1,98 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+<meta charset="utf-8" >
+
 <title>英语第十一次课 | Kevin Notes</title>
-<link rel="shortcut icon" href="https://kevin0217168.github.io/Notes.github.io//favicon.ico?v=1590811325792">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://kevin0217168.github.io/Notes.github.io//favicon.ico?v=1590811571715">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://kevin0217168.github.io/Notes.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="英语第十一次课 | Kevin Notes - Atom Feed" href="https://kevin0217168.github.io/Notes.github.io//atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
 
-    <meta name="description" content="2020/5-15  凯文
-
-出门测讲解
-
-as soon as  一...就...
-感叹句
-
-What + adj. + 不可数名词！
-What such + a/an + adj. + 单数名词！ 如此...的
-What 感叹名词短语
-..." />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://kevin0217168.github.io/Notes.github.io/">
-  <img class="avatar" src="https://kevin0217168.github.io/Notes.github.io//images/avatar.png?v=1590811325792" alt="">
-  </a>
-  <h1 class="site-title">
-    Kevin Notes
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://kevin0217168.github.io/Notes.github.io/">
+        <img class="avatar" src="https://kevin0217168.github.io/Notes.github.io//images/avatar.png?v=1590811571715" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://kevin0217168.github.io/Notes.github.io/">
+        <h1 class="site-title">Kevin Notes</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              英语第十一次课
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-05-30
-              </span>
-              <span>
-                9 min read
-              </span>
-              
-            </div>
+          
+          <h2 class="post-title">英语第十一次课</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-05-30</span>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>2020/5-15  凯文</p>
+          </div>
+          <div class="post-content">
+            <p>2020/5-15  凯文</p>
 <!-- more -->
 <h2 id="出门测讲解">出门测讲解</h2>
 <ul>
@@ -570,129 +564,86 @@ eg. The ice is solid.</p>
 <li><strong>set up</strong> 建成</li>
 </ul>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%87%BA%E9%97%A8%E6%B5%8B%E8%AE%B2%E8%A7%A3">出门测讲解</a></li>
-<li><a href="#%E5%8D%95%E8%AF%8D">单词</a>
-<ul>
-<li><a href="#record-n-%E8%AE%B0%E5%BD%95">record n. 记录</a></li>
-<li><a href="#present-n-%E7%A4%BC%E7%89%A9">present n. 礼物</a></li>
-<li><a href="#desert-n-%E6%B2%99%E6%BC%A0-v-%E5%BA%9F%E5%BC%83">desert n. 沙漠 v. 废弃</a></li>
-<li><a href="#strong-adj-%E5%BC%BA%E5%A3%AE%E7%9A%84">strong adj. 强壮的</a></li>
-<li><a href="#swimmer-n-%E6%B8%B8%E6%B3%B3%E8%BF%90%E5%8A%A8%E5%91%98">swimmer n. 游泳运动员</a></li>
-<li><a href="#succeed-v-%E6%88%90%E5%8A%9F">succeed v. 成功</a></li>
-<li><a href="#train-v-%E8%AE%AD%E7%BB%83">train v. 训练</a></li>
-<li><a href="#anxiously-adv-%E7%84%A6%E6%80%A5%E5%9C%B0">anxiously adv. 焦急地</a></li>
-<li><a href="#intend-v-%E6%89%93%E7%AE%97">intend v. 打算</a></li>
-<li><a href="#%E7%BB%83%E4%B9%A0">练习</a></li>
-</ul>
-</li>
-<li><a href="#%E8%AF%AD%E6%B3%95">语法</a>
-<ul>
-<li><a href="#%E4%B8%80%E8%88%AC%E5%B0%86%E6%9D%A5%E6%97%B6">一般将来时</a>
-<ul>
-<li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84">基本结构</a></li>
-<li><a href="#%E6%97%B6%E9%97%B4%E7%8A%B6%E8%AF%AD">时间状语</a></li>
-<li><a href="#%E5%87%A0%E7%A7%8D%E8%A1%A8%E6%9C%AA%E6%9D%A5%E6%88%96%E8%AE%A1%E5%88%92%E7%9A%84%E6%96%B9%E5%BC%8F">几种表未来或计划的方式</a></li>
-<li><a href="#%E4%B8%8D%E7%94%A8%E5%B0%86%E6%9D%A5%E6%97%B6%E7%94%A8%E4%B8%80%E8%88%AC%E7%8E%B0%E5%9C%A8%E6%97%B6%E7%9A%84%E6%83%85%E5%86%B5">不用将来时，用一般现在时的情况</a></li>
-<li><a href="#%E7%BB%83%E4%B9%A0-2">练习</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E8%AF%BE%E6%96%87-across-the-channel%E7%A9%BF%E8%B6%8A%E8%8B%B1%E5%90%89%E5%88%A9%E6%B5%B7%E5%B3%A1">课文 Across the Channel(穿越英吉利海峡)</a>
-<ul>
-<li><a href="#she-uis-going-to-set-out-fromu-the-french-coast-at-five-oclock-in-the-morning">She <u><em>is going to set out from</em></u> the French coast at five o’clock in the morning.</a></li>
-<li><a href="#she-is-a-strong-swimmer-and-many-people-ufeel-thatu-she-uis-sure-tou-succeed">She is a strong swimmer and many people <u><em>feel that</em></u> she <u><em>is sure to</em></u> succeed.</a></li>
-<li><a href="#debbies-father-will-uset-out-withu-her-in-a-small-boat">Debbie’s father will <em><u>set out with</u></em> her in a small boat.</a></li>
-<li><a href="#tomorrow-he-uwill-be-watchingu-her-anxiously-uasu-she-swims-the-long-distance-to-england">Tomorrow he <u><em>will be watching</em></u> her anxiously <u><em>as</em></u> she swims the long distance to England.</a></li>
-<li><a href="#debbie-uintends-to-takeu-short-rests-every-utwo-hoursu">Debbie <em><u>intends to (take</u></em> short rests) <em>every</em> <em><u>two hours</u></em>.</a></li>
-<li><a href="#she-uwill-haveu-something-to-drink-but-she-uwill-not-eatu-any-solid-food">She <em><u>will have</u></em> something to drink but she <em><u>will not eat</u></em> any solid food.</a></li>
-<li><a href="#most-of-debbies-school-friends-will-be-waiting-for-her-on-the-english-coast">Most of Debbie’s school friends will be waiting for her on the English coast.</a></li>
-</ul>
-</li>
-<li><a href="#%E9%87%8D%E9%9A%BE%E7%82%B9">重难点</a>
-<ul>
-<li><a href="#watch-look-at-follow">watch,  look at,  follow</a></li>
-<li><a href="#solid-firm-stable">solid, firm, stable</a></li>
-</ul>
-</li>
-<li><a href="#%E5%87%BA%E9%97%A8%E6%B5%8B">出门测</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
           <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://kevin0217168.github.io/Notes.github.io/post/ying-yu-di-shi-er-ci-ke/">
+            <a class="purple-link" href="https://kevin0217168.github.io/Notes.github.io/post/ying-yu-di-shi-er-ci-ke/">
               <h3 class="post-title">
-                英语第十二次课
+                下一篇：英语第十二次课
               </h3>
             </a>
           </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
         
 
         
+      
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://kevin0217168.github.io/Notes.github.io//atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://kevin0217168.github.io/Notes.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
-      </div>
+
     </div>
+    <script type="application/javascript">
 
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
     <script>
-      hljs.initHighlightingOnLoad()
 
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
 
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
-
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
-
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
+      gitalk.render('gitalk-container')
 
     </script>
+  
+
+  
+
+
+
+
   </body>
 </html>
