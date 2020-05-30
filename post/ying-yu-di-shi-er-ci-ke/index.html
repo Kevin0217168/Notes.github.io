@@ -1,108 +1,92 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>英语第十二次课 | Gridea</title>
-<link rel="shortcut icon" href="https://kevin0217168.github.io/Notes.github.io//favicon.ico?v=1590810194563">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+    
+<meta charset="utf-8" >
+
+<title>英语第十二次课 | Kevin Notes</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://kevin0217168.github.io/Notes.github.io//favicon.ico?v=1590810704069">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://kevin0217168.github.io/Notes.github.io//styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="英语第十二次课 | Gridea - Atom Feed" href="https://kevin0217168.github.io/Notes.github.io//atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="2020/5-23  凯文
-入门测
-
-
-There be 句型的一般将来时：
-
-There will be
-There is going to be
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
 
-next mouth 下个月，一般将来时
-
-
-否定写法：will not = won..." />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://kevin0217168.github.io/Notes.github.io/">
-  <img class="avatar" src="https://kevin0217168.github.io/Notes.github.io//images/avatar.png?v=1590810194563" alt="">
-  </a>
-  <h1 class="site-title">
-    Gridea
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="https://kevin0217168.github.io/Notes.github.io/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://kevin0217168.github.io/Notes.github.io/">
+        <img class="avatar" src="https://kevin0217168.github.io/Notes.github.io//images/avatar.png?v=1590810704069" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://kevin0217168.github.io/Notes.github.io/">
+        <h1 class="site-title">Kevin Notes</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              英语第十二次课
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-05-30
-              </span>
-              <span>
-                9 min read
-              </span>
-              
-            </div>
+          
+          <h2 class="post-title">英语第十二次课</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-05-30</span>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>2020/5-23  凯文</p>
+          </div>
+          <div class="post-content">
+            <p>2020/5-23  凯文</p>
 <h2 id="入门测">入门测</h2>
 <ul>
 <li>
@@ -618,130 +602,57 @@ next mouth 下个月，一般将来时
 </ul>
 <h3 id="周中测">周中测</h3>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%A5%E9%97%A8%E6%B5%8B">入门测</a></li>
-<li><a href="#%E7%BB%83%E4%B9%A0">练习</a></li>
-<li><a href="#%E5%8D%95%E8%AF%8D">单词</a>
-<ul>
-<li><a href="#olympic-adj-%E5%A5%A5%E6%9E%97%E5%8C%B9%E5%85%8B%E7%9A%84">Olympic adj. 奥林匹克的</a></li>
-<li><a href="#hold-held-held-v-%E5%8F%AC%E5%BC%80">hold-held-held v. 召开</a></li>
-<li><a href="#government-n%E6%94%BF%E5%BA%9C">government n.政府</a></li>
-<li><a href="#immensefantastic-adj-%E5%B7%A8%E5%A4%A7%E7%9A%84">immense/fantastic adj. 巨大的</a></li>
-<li><a href="#stadium-n-%E9%9C%B2%E5%A4%A9%E4%BD%93%E8%82%B2%E5%9C%BA">stadium n. 露天体育场</a></li>
-<li><a href="#standard-n-%E6%A0%87%E5%87%86">standard n. 标准</a></li>
-<li><a href="#capital-n-%E9%A6%96%E9%83%BD">capital n. 首都</a></li>
-<li><a href="#design-v-%E8%AE%BE%E8%AE%A1">design v. 设计</a></li>
-<li><a href="#%E7%BB%83%E4%B9%A0-2">练习</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B0%86%E6%9D%A5%E5%AE%8C%E6%88%90%E6%97%B6">将来完成时</a>
-<ul>
-<li><a href="#%E7%BB%93%E6%9E%84">结构</a></li>
-<li><a href="#%E6%97%B6%E9%97%B4%E7%8A%B6%E8%AF%AD">时间状语</a></li>
-<li><a href="#%E5%AE%9A%E4%B9%89">定义</a>
-<ul>
-<li><a href="#1-%E8%A1%A8%E7%A4%BA%E5%9C%A8u%E5%B0%86%E6%9D%A5u%E6%9F%90%E4%B8%80%E6%97%B6%E9%97%B4%E4%BB%A5%E5%89%8Du%E5%B7%B1%E7%BB%8F%E5%AE%8C%E6%88%90u%E6%88%96%E4%B8%80%E7%9B%B4%E6%8C%81%E7%BB%AD%E7%9A%84%E5%8A%A8%E4%BD%9C">(1. 表示在<u><strong>将来</strong></u>某一时间以前<u><strong>己经完成</strong></u>或一直持续的动作</a></li>
-<li><a href="#2-%E8%A1%A8%E7%A4%BAu%E6%8E%A8%E6%B5%8Bu">(2. 表示<u>推测</u></a></li>
-<li><a href="#3-%E8%A1%A8%E7%A4%BAu%E5%8F%AF%E8%83%BD%E6%80%A7u-%E6%88%96u%E8%AE%BE%E6%83%B3u">(3. 表示“<u>可能性</u>” ，或“<u>设想</u>”</a></li>
-<li><a href="#4-%E7%8E%B0%E5%9C%A8%E5%AE%8C%E6%88%90%E6%97%B6%E5%8F%AF%E4%BB%A5%E4%BB%A3%E6%9B%BF%E5%B0%86%E6%9D%A5%E5%AE%8C%E6%88%90%E6%97%B6">(4. 现在完成时可以代替将来完成时</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B0%86%E6%9D%A5%E5%AE%8C%E6%88%90%E6%97%B6-%E7%8E%B0%E5%9C%A8%E5%AE%8C%E6%88%90%E6%97%B6">将来完成时 &amp; 现在完成时</a></li>
-<li><a href="#%E5%B0%86%E6%9D%A5%E5%AE%8C%E6%88%90%E6%97%B6-%E4%B8%80%E8%88%AC%E5%B0%86%E6%9D%A5%E6%97%B6">将来完成时 &amp; 一般将来时</a></li>
-<li><a href="#%E4%B8%80%E8%88%AC%E5%B0%86%E6%9D%A5%E6%97%B6-%E5%B0%86%E6%9D%A5%E5%AE%8C%E6%88%90%E6%97%B6-%E7%8E%B0%E5%9C%A8%E5%AE%8C%E6%88%90%E6%97%B6">一般将来时 &amp; 将来完成时 &amp; 现在完成时</a></li>
-<li><a href="#%E7%BB%83%E4%B9%A0-3">练习</a></li>
-</ul>
-</li>
-<li><a href="#%E8%AF%BE%E6%96%87">课文</a>
-<ul>
-<li><a href="#the-olympic-games-will-be-held-in-our-country-in-fuour-years-timeu"><em>The Olympic Games will be held in our country in f<u>our years' time.</u></em></a></li>
-<li><a href="#as-ua-great-many-peopleu-will-be-visiting-the-country-the-government-uwill-be-buildingu-new-hotels-an-immense-stadium-and-a-new-olympic-standard-swimming-pool">As <u><em>a great many people</em></u> will be visiting the country, the government <u><em>will be building</em></u> new hotels, an immense stadium, and a new Olympic-standard swimming pool.</a></li>
-<li><a href="#they-uwill-also-be-buildingu-new-roads-and-ua-special-railway-lineu">They <u><em>will also be building</em></u> new roads and <em><u>a special railway line.</u></em></a></li>
-<li><a href="#workers-uwill-have-completedu-the-new-roads-uby-the-end-of-this-yearu">Workers <u><em>will have completed</em></u> the new roads <u><em>by the end of this year.</em></u></a></li>
-<li><a href="#everybody-will-be-watching-anxiously-uasu-the-new-buildings-ugo-upu">Everybody will be watching anxiously <em><u>as</u></em> the new buildings <em><u>go up.</u></em></a></li>
-<li><a href="#we-are-all-very-excited-and-are-ulooking-forward-to-the-olympicu-games-because-they-uhave-never-been-heldu-before-in-this-country">We are all very excited and are <em><u>looking forward to the Olympic</u></em> Games because they <em><u>have never been held</u></em> before in this country.</a></li>
-</ul>
-</li>
-<li><a href="#%E5%87%BA%E9%97%A8%E6%B5%8B">出门测</a>
-<ul>
-<li><a href="#%E5%91%A8%E4%B8%AD%E6%B5%8B">周中测</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
           <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://kevin0217168.github.io/Notes.github.io/post/hello-gridea/">
+            <a class="purple-link" href="https://kevin0217168.github.io/Notes.github.io/post/hello-gridea/">
               <h3 class="post-title">
-                Hello Gridea
+                下一篇：Hello Gridea
               </h3>
             </a>
           </div>
-        
+          
+      </div>
 
-        
+      
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://kevin0217168.github.io/Notes.github.io//atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://kevin0217168.github.io/Notes.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
-      </div>
+
     </div>
+    <script type="application/javascript">
 
-    <script>
-      hljs.initHighlightingOnLoad()
+hljs.initHighlightingOnLoad()
 
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
+</script>
 
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
 
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
 
-    </script>
+
   </body>
 </html>
