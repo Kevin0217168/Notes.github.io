@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://kevin0217168.github.io/Notes.github.io/</id>
     <title>Kevin Notes</title>
-    <updated>2020-05-30T13:02:21.486Z</updated>
+    <updated>2020-05-30T13:14:02.205Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <link rel="alternate" href="https://kevin0217168.github.io/Notes.github.io/"/>
+    <link rel="self" href="https://kevin0217168.github.io/Notes.github.io/atom.xml"/>
+    <subtitle>长风破浪会有时，直挂云帆济沧海。&lt;br&gt;
+为中华崛起而读书!</subtitle>
+    <logo>https://kevin0217168.github.io/Notes.github.io/images/avatar.png</logo>
+    <icon>https://kevin0217168.github.io/Notes.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Kevin Notes</rights>
     <entry>
         <title type="html"><![CDATA[如何从bilibili下载视频并提取音频]]></title>
-        <id>http://localhost:4000/post/ru-he-cong-bilibili-xia-zai-shi-pin-bing-ti-qu-yin-pin/</id>
-        <link href="http://localhost:4000/post/ru-he-cong-bilibili-xia-zai-shi-pin-bing-ti-qu-yin-pin/">
+        <id>https://kevin0217168.github.io/Notes.github.io/post/ru-he-cong-bilibili-xia-zai-shi-pin-bing-ti-qu-yin-pin/</id>
+        <link href="https://kevin0217168.github.io/Notes.github.io/post/ru-he-cong-bilibili-xia-zai-shi-pin-bing-ti-qu-yin-pin/">
         </link>
         <updated>2020-05-30T12:46:32.000Z</updated>
         <summary type="html"><![CDATA[<p>在B站上找到好听的歌曲而音乐播放器没有版权？<br>
@@ -255,8 +256,8 @@ pause
     </entry>
     <entry>
         <title type="html"><![CDATA[英语第十二次课]]></title>
-        <id>http://localhost:4000/post/ying-yu-di-shi-er-ci-ke/</id>
-        <link href="http://localhost:4000/post/ying-yu-di-shi-er-ci-ke/">
+        <id>https://kevin0217168.github.io/Notes.github.io/post/ying-yu-di-shi-er-ci-ke/</id>
+        <link href="https://kevin0217168.github.io/Notes.github.io/post/ying-yu-di-shi-er-ci-ke/">
         </link>
         <updated>2020-05-23T12:26:15.000Z</updated>
         <content type="html"><![CDATA[<p>2020/5-23  凯文</p>
@@ -723,7 +724,7 @@ pause
 <ul>
 <li><strong>a great many people = a large number of people</strong></li>
 </ul>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1590811191378.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://kevin0217168.github.io/Notes.github.io//post-images/1590811191378.png" alt="" loading="lazy"></figure>
 <h3 id="they-uwill-also-be-buildingu-new-roads-and-ua-special-railway-lineu">They <u><em>will also be building</em></u> new roads and <em><u>a special railway line.</u></em></h3>
 <ul>
 <li><strong>a special railway line</strong> 专线铁路</li>
@@ -734,9 +735,9 @@ pause
 <li>by 是<strong>完成时</strong>的标志，表示“到…为止， 在…之前” 不能与表示一段时间的名词连用，只能与表示时间点的名词或词组连用</li>
 </ul>
 <h3 id="everybody-will-be-watching-anxiously-uasu-the-new-buildings-ugo">Everybody will be watching anxiously <em><u>as</u></em> the new buildings *<u>go</h3>
-<p><a href="http://localhost:4000/post-images/1590811155482.png"></a></p>
+<p><a href="https://kevin0217168.github.io/Notes.github.io//post-images/1590811155482.png"></a></p>
 <h3 id="we-are-all-very-excited-and-are-ulooking-forward-to-the-olympicu-games-because-they-uhave-never-been-heldu-before-in-this-country">We are all very excited and are <em><u>looking forward to the Olympic</u></em> Games because they <em><u>have never been held</u></em> before in this country.</h3>
-<figure data-type="image" tabindex="2"><img src="http://localhost:4000/post-images/1590811180840.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://kevin0217168.github.io/Notes.github.io//post-images/1590811180840.png" alt="" loading="lazy"></figure>
 <h2 id="出门测">出门测</h2>
 <ul>
 <li>
@@ -778,8 +779,8 @@ pause
     </entry>
     <entry>
         <title type="html"><![CDATA[英语第十一次课]]></title>
-        <id>http://localhost:4000/post/ying-yu-di-shi-yi-ci-ke/</id>
-        <link href="http://localhost:4000/post/ying-yu-di-shi-yi-ci-ke/">
+        <id>https://kevin0217168.github.io/Notes.github.io/post/ying-yu-di-shi-yi-ci-ke/</id>
+        <link href="https://kevin0217168.github.io/Notes.github.io/post/ying-yu-di-shi-yi-ci-ke/">
         </link>
         <updated>2020-05-15T12:56:49.000Z</updated>
         <content type="html"><![CDATA[<p>2020/5-15  凯文</p>
@@ -1256,8 +1257,8 @@ eg. The ice is solid.</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[python天气信息获取模块]]></title>
-        <id>http://localhost:4000/post/python-tian-qi-xin-xi-huo-qu-mo-kuai/</id>
-        <link href="http://localhost:4000/post/python-tian-qi-xin-xi-huo-qu-mo-kuai/">
+        <id>https://kevin0217168.github.io/Notes.github.io/post/python-tian-qi-xin-xi-huo-qu-mo-kuai/</id>
+        <link href="https://kevin0217168.github.io/Notes.github.io/post/python-tian-qi-xin-xi-huo-qu-mo-kuai/">
         </link>
         <updated>2020-02-05T05:50:40.000Z</updated>
         <content type="html"><![CDATA[<h4 id="基于lxmlrequestsbs4库-爬取中国天气网">                                        基于lxml，requests，bs4库。爬取中国天气网</h4>
@@ -2140,8 +2141,8 @@ weather_list = w.hours_weather()
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>http://localhost:4000/post/hello-gridea/</id>
-        <link href="http://localhost:4000/post/hello-gridea/">
+        <id>https://kevin0217168.github.io/Notes.github.io/post/hello-gridea/</id>
+        <link href="https://kevin0217168.github.io/Notes.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
