@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>python天气信息获取模块 | Kevin Notes</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://kevin0217168.github.io/Notes.github.io//favicon.ico?v=1590817988966">
+<link rel="stylesheet" href="https://kevin0217168.github.io/Notes.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="                                        基于lxml，requests，bs4库。爬取中国天气网
+使用前必看
+使用的库有 lxml，requests，json，pickle，bs4，re，os
+
+其中..." />
+    <meta name="keywords" content="python" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://kevin0217168.github.io/Notes.github.io/">
+        <img src="https://kevin0217168.github.io/Notes.github.io//images/avatar.png?v=1590817988966" class="site-logo">
+        <h1 class="site-title">Kevin Notes</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://kevin0217168.github.io/Notes.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">python天气信息获取模块</h2>
+            <div class="post-date">2020-02-05</div>
+            
+            <div class="post-content" v-pre>
+              <h4 id="基于lxmlrequestsbs4库-爬取中国天气网">                                        基于lxml，requests，bs4库。爬取中国天气网</h4>
+<h3 id="使用前必看">使用前必看</h3>
+<p>使用的库有 lxml，requests，json，pickle，bs4，re，os</p>
+<blockquote>
+<p>其中<em>lxml</em>，<em>requests</em>，<em>bs4</em>库 python不自带，需要自行检查并安装<br>
+以下提供pip的下载方法，由于国内pip下载过慢，此处将使用清华镜像源下载<br>
+如果仍然发生超时(time out)请再尝试一次</p>
+</blockquote>
+<pre><code class="language-python">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ lxml
+
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ requests
+
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ bs4
+</code></pre>
+<h3 id="使用方法">使用方法</h3>
+<h4 id="导入库">导入库</h4>
+<pre><code class="language-python">import weather
+</code></pre>
+<blockquote>
+<p>此模块方法封装在<strong>weather</strong>类中，在调用方法前需要先实例化此类<br>
+需传入要查找的城市名称<br>
+要注意：不支持县，村级，不支持直接输入省名，国外城市，可查询省内城市及直辖市</p>
+</blockquote>
+<p>可行的方法</p>
+<pre><code class="language-python">w = weather(&quot;郑州&quot;)
+</code></pre>
+<p>不支持的方法</p>
+<pre><code class="language-python"># 查找了县级
+w = weather(&quot;通许&quot;)
+Exception: 查找不到该城市
+
+# 查找了省名
+w = weather(&quot;河南&quot;)
+Exception: 不支持查找整个省的天气，可尝试查找省会郑州，或省内其他城市
+
+# 查找了国外城市
+w = weather(&quot;堪培拉&quot;)
+Exception: 查找不到该城市
+</code></pre>
+<h4 id="内部方法概要">内部方法概要</h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:left">用途</th>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>real_time_weather</td>
+<td style="text-align:left">获取实时天气信息</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">python字典</td>
+</tr>
+<tr>
+<td>weather_suggestion</td>
+<td style="text-align:left">获取实时天气建议</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">python字典</td>
+</tr>
+<tr>
+<td>week_weather</td>
+<td style="text-align:left">获取14天天气信息</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">python列表</td>
+</tr>
+<tr>
+<td>hours_weather</td>
+<td style="text-align:left">获取72小时天气信息</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">python列表</td>
+</tr>
+</tbody>
+</table>
+<h4 id="real_time_weather获取实时天气信息方法">real_time_weather获取实时天气信息方法</h4>
+<h5 id="返回值信息字典dict">返回值信息(字典dict)</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字典键</th>
+<th style="text-align:left">键</th>
+<th style="text-align:left">注解</th>
+<th style="text-align:left">示例值</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">date</td>
+<td style="text-align:left">Huang_Li</td>
+<td style="text-align:left">黄历列表</td>
+<td style="text-align:left">宜/忌</td>
+<td>列表(list)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">week</td>
+<td style="text-align:left">星期</td>
+<td style="text-align:left">星期一</td>
+<td>字符串(str)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">lunar_calendar</td>
+<td style="text-align:left">农历</td>
+<td style="text-align:left">农历正月初十</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">weather</td>
+<td style="text-align:left">Vehicle_limit_operation</td>
+<td style="text-align:left">限行尾号</td>
+<td style="text-align:left">限行尾号：1和6</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">air_temperature</td>
+<td style="text-align:left">气温</td>
+<td style="text-align:left">6</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">weather</td>
+<td style="text-align:left">天气</td>
+<td style="text-align:left">晴</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">air_quality</td>
+<td style="text-align:left">空气质量</td>
+<td style="text-align:left">空气质量 良</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">wind_power</td>
+<td style="text-align:left">风力</td>
+<td style="text-align:left">北风 2级</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">humidity</td>
+<td style="text-align:left">湿度</td>
+<td style="text-align:left">湿度：37%</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">ultraviolet_rays</td>
+<td style="text-align:left">紫外线</td>
+<td style="text-align:left">紫外线：4级</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">pressure</td>
+<td style="text-align:left">气压</td>
+<td style="text-align:left">气压1015百帕</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">body_sensation</td>
+<td style="text-align:left">体感</td>
+<td style="text-align:left">凉</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">Somatosensory_temperature</td>
+<td style="text-align:left">体感温度</td>
+<td style="text-align:left">10℃</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">visibility</td>
+<td style="text-align:left">能见度</td>
+<td style="text-align:left">良好</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">visibility_distance</td>
+<td style="text-align:left">能见距离</td>
+<td style="text-align:left">9.9km</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">cloudiness</td>
+<td style="text-align:left">云量</td>
+<td style="text-align:left">晴</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">cloud_ratio</td>
+<td style="text-align:left">云量比</td>
+<td style="text-align:left">7%</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">sunrise_time</td>
+<td style="text-align:left">日出时间</td>
+<td style="text-align:left">日出：07:23</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">sunset_time</td>
+<td style="text-align:left">日落时间</td>
+<td style="text-align:left">日落：17:56</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">air_quality</td>
+<td style="text-align:left">air_quality</td>
+<td style="text-align:left">空气质量</td>
+<td style="text-align:left">良</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">air_quality_recommendations</td>
+<td style="text-align:left">空气质量建议</td>
+<td style="text-align:left">空气良好，可以正常参加户外活动。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">air_quality_recommendations_list</td>
+<td style="text-align:left">空气质量建议列表</td>
+<td style="text-align:left">['无需戴口罩', '适宜外出', '适宜开窗', '关闭净化器']</td>
+<td>列表(list)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">pollutant_index_list</td>
+<td style="text-align:left">污染物指数列表0:Pm2.5, 1:pm10, 2:O3, 3:NO2 4:SO2</td>
+<td style="text-align:left">['54', '65', '88', '15', '9']</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="程序示例">程序示例</h5>
+<pre><code class="language-python">w.weather(&quot;郑州&quot;)
+weather_dict = w.real_time_weather()
+</code></pre>
+<h5 id="返回示例">返回示例</h5>
+<pre><code class="language-json">{
+    &quot;date&quot;: {
+        &quot;Huang_Li&quot;: [
+            &quot;宜: 祭祀、祈福、求嗣、斋醮、入殓、除服、成服、移柩、安葬、启钻&quot;,
+            &quot;忌: 嫁娶、动土、开光、盖屋、破土&quot;
+        ],
+        &quot;week&quot;: &quot;星期二&quot;,
+        &quot;lunar_calendar&quot;: &quot;农历正月十一&quot;
+    },
+    &quot;weather&quot;: {
+        &quot;Vehicle_limit_operation&quot;: &quot;限行尾号：2和7&quot;,
+        &quot;air_temperature&quot;: &quot;8℃&quot;,
+        &quot;weather&quot;: &quot;霾&quot;,
+        &quot;air_quality&quot;: &quot;空气质量 轻度污染&quot;,
+        &quot;wind_power&quot;: &quot;东风 2级&quot;,
+        &quot;humidity&quot;: &quot;湿度：51%&quot;,
+        &quot;ultraviolet_rays&quot;: &quot;紫外线：3级&quot;,
+        &quot;pressure&quot;: &quot;气压1011百帕&quot;,
+        &quot;body_sensation&quot;: &quot;凉&quot;,
+        &quot;Somatosensory_temperature&quot;: &quot;10℃&quot;,
+        &quot;visibility&quot;: &quot;中等&quot;,
+        &quot;visibility_distance&quot;: &quot;4.4km&quot;,
+        &quot;cloudiness&quot;: &quot;多云&quot;,
+        &quot;cloud_ratio&quot;: &quot;51%&quot;,
+        &quot;sunrise_time&quot;: &quot;日出：07:22&quot;,
+        &quot;sunset_time&quot;: &quot;日落：17:57&quot;
+    },
+    &quot;air_quality&quot;: {
+        &quot;air_quality&quot;: &quot;轻度污染&quot;,
+        &quot;air_quality_recommendations&quot;: &quot;空气一般，敏感人员外出时，需做好防护措施。&quot;,
+        &quot;air_quality_recommendations_list&quot;: [
+            &quot;建议戴口罩&quot;,
+            &quot;减少外出&quot;,
+            &quot;减少开窗&quot;,
+            &quot;开启净化器&quot;
+        ],
+        &quot;pollutant_index_list&quot;: [
+            &quot;114&quot;,
+            &quot;112&quot;,
+            &quot;58&quot;,
+            &quot;32&quot;,
+            &quot;13&quot;,
+            &quot;1&quot;
+        ]
+    }
+}
+</code></pre>
+<h4 id="week_weather获取14天天气信息方法">week_weather获取14天天气信息方法</h4>
+<h5 id="返回值信息列表list">返回值信息(列表list)</h5>
+<table>
+<thead>
+<tr>
+<th>索引</th>
+<th style="text-align:left">键</th>
+<th style="text-align:left">注解</th>
+<th style="text-align:left">示例值</th>
+<th style="text-align:left">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td style="text-align:left">date</td>
+<td style="text-align:left">日期</td>
+<td style="text-align:left">今天(02-04)</td>
+<td style="text-align:left">字符串(str)</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">weather</td>
+<td style="text-align:left">天气</td>
+<td style="text-align:left">晴</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">air_temperature</td>
+<td style="text-align:left">气温</td>
+<td style="text-align:left">-1/10℃</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">air_quality</td>
+<td style="text-align:left">空气质量</td>
+<td style="text-align:left">良</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">wind_power</td>
+<td style="text-align:left">风力</td>
+<td style="text-align:left">北风 2级</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td>1~13</td>
+<td style="text-align:left">...同上</td>
+<td style="text-align:left">...</td>
+<td style="text-align:left">...</td>
+<td style="text-align:left">...</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：在第8~14天中无法获取空气质量信息，值为&quot;暂无&quot;为正常现象</p>
+</blockquote>
+<h5 id="程序示例-2">程序示例</h5>
+<pre><code class="language-python">w.weather(&quot;郑州&quot;)
+weather_list = w.week_weather()
+</code></pre>
+<h5 id="返回示例-2">返回示例</h5>
+<pre><code class="language-json">[
+    {
+        &quot;date&quot;: &quot;今天(02-04)&quot;,
+        &quot;weather&quot;: &quot;晴转多云&quot;,
+        &quot;air_temperature&quot;: &quot;-1/10℃&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;,
+        &quot;wind_power&quot;: &quot;东北风 4级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;明天(02-05)&quot;,
+        &quot;weather&quot;: &quot;雨夹雪&quot;,
+        &quot;air_temperature&quot;: &quot;-1/1℃&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;,
+        &quot;wind_power&quot;: &quot;东北风 3级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周四(02-06)&quot;,
+        &quot;weather&quot;: &quot;雨夹雪转多云&quot;,
+        &quot;air_temperature&quot;: &quot;-3/2℃&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;,
+        &quot;wind_power&quot;: &quot;东北风 1级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周五(02-07)&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_temperature&quot;: &quot;-2/10℃&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;,
+        &quot;wind_power&quot;: &quot;西南风 3级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周六(02-08)&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_temperature&quot;: &quot;1/13℃&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;,
+        &quot;wind_power&quot;: &quot;西风 3级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周日(02-09)&quot;,
+        &quot;weather&quot;: &quot;晴转多云&quot;,
+        &quot;air_temperature&quot;: &quot;1/15℃&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;,
+        &quot;wind_power&quot;: &quot;西风 3级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周一(02-10)&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_temperature&quot;: &quot;4/16℃&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;,
+        &quot;wind_power&quot;: &quot;南风 3级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周二(02-11)&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_temperature&quot;: &quot;4/13℃&quot;,
+        &quot;air_quality&quot;: &quot;暂无&quot;,
+        &quot;wind_power&quot;: &quot;西北风 1级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周三(02-12)&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_temperature&quot;: &quot;5/19℃&quot;,
+        &quot;air_quality&quot;: &quot;暂无&quot;,
+        &quot;wind_power&quot;: &quot;西北风 1级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周四(02-13)&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_temperature&quot;: &quot;2/15℃&quot;,
+        &quot;air_quality&quot;: &quot;暂无&quot;,
+        &quot;wind_power&quot;: &quot;东南风 1级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周五(02-14)&quot;,
+        &quot;weather&quot;: &quot;晴转多云&quot;,
+        &quot;air_temperature&quot;: &quot;1/12℃&quot;,
+        &quot;air_quality&quot;: &quot;暂无&quot;,
+        &quot;wind_power&quot;: &quot;东北风 3级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周六(02-15)&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_temperature&quot;: &quot;1/11℃&quot;,
+        &quot;air_quality&quot;: &quot;暂无&quot;,
+        &quot;wind_power&quot;: &quot;东南风 1级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周日(02-16)&quot;,
+        &quot;weather&quot;: &quot;小雨&quot;,
+        &quot;air_temperature&quot;: &quot;2/9℃&quot;,
+        &quot;air_quality&quot;: &quot;暂无&quot;,
+        &quot;wind_power&quot;: &quot;北风 1级&quot;
+    },
+    {
+        &quot;date&quot;: &quot;周一(02-17)&quot;,
+        &quot;weather&quot;: &quot;多云转晴&quot;,
+        &quot;air_temperature&quot;: &quot;2/12℃&quot;,
+        &quot;air_quality&quot;: &quot;暂无&quot;,
+        &quot;wind_power&quot;: &quot;东南风 1级&quot;
+    }
+]
+</code></pre>
+<h4 id="hours_weather获取72小时天气信息方法">hours_weather获取72小时天气信息方法</h4>
+<h5 id="返回值信息列表list-2">返回值信息(列表list)</h5>
+<table>
+<thead>
+<tr>
+<th>索引</th>
+<th style="text-align:left">键</th>
+<th style="text-align:left">注解</th>
+<th style="text-align:left">示例值</th>
+<th style="text-align:left">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td style="text-align:left">time</td>
+<td style="text-align:left">时间</td>
+<td style="text-align:left">14时</td>
+<td style="text-align:left">字符串(str)</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">weather</td>
+<td style="text-align:left">天气</td>
+<td style="text-align:left">晴</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left">air_quality</td>
+<td style="text-align:left">空气质量</td>
+<td style="text-align:left">良</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td>1~71</td>
+<td style="text-align:left">...同上</td>
+<td style="text-align:left">...</td>
+<td style="text-align:left">...</td>
+<td style="text-align:left">...</td>
+</tr>
+</tbody>
+</table>
+<h5 id="程序示例-3">程序示例</h5>
+<pre><code class="language-python">w.weather(&quot;郑州&quot;)
+weather_list = w.hours_weather()
+</code></pre>
+<h5 id="返回示例-3">返回示例</h5>
+<pre><code class="language-json">[
+    {
+        &quot;time&quot;: &quot;14时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;15时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;16时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;17时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;18时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;19时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;20时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;21时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;轻度&quot;
+    },
+    {
+        &quot;time&quot;: &quot;22时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;23时&quot;,
+        &quot;weather&quot;: &quot;晴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;00时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;01时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;02时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;03时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;04时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;05时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;06时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;07时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;08时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;09时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;10时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;11时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;12时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;13时&quot;,
+        &quot;weather&quot;: &quot;阴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;14时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;15时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;16时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;17时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;18时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;19时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;20时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;21时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;22时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;23时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;00时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;01时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;02时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;03时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;04时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;05时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;06时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;07时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;08时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;09时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;10时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;11时&quot;,
+        &quot;weather&quot;: &quot;冰霰&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;12时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;13时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;14时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;15时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;16时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;17时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;18时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;19时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;20时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;21时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;22时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;优&quot;
+    },
+    {
+        &quot;time&quot;: &quot;23时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;00时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;01时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;02时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;03时&quot;,
+        &quot;weather&quot;: &quot;多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;04时&quot;,
+        &quot;weather&quot;: &quot;大部分多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;05时&quot;,
+        &quot;weather&quot;: &quot;间歇性多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;06时&quot;,
+        &quot;weather&quot;: &quot;间歇性多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;07时&quot;,
+        &quot;weather&quot;: &quot;部分多云&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;08时&quot;,
+        &quot;weather&quot;: &quot;部分晴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;09时&quot;,
+        &quot;weather&quot;: &quot;部分晴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;10时&quot;,
+        &quot;weather&quot;: &quot;大部分晴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;11时&quot;,
+        &quot;weather&quot;: &quot;大部分晴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    },
+    {
+        &quot;time&quot;: &quot;12时&quot;,
+        &quot;weather&quot;: &quot;部分晴&quot;,
+        &quot;air_quality&quot;: &quot;良&quot;
+    }
+]
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://kevin0217168.github.io/Notes.github.io/tag/3nutJzWV1/" class="tag">
+                    python
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://kevin0217168.github.io/Notes.github.io/post/hello-gridea/">
+                  <h3 class="post-title">
+                    Hello Gridea
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
