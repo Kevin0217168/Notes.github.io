@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>如何从bilibili下载视频并提取音频 | Kevin Notes</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://kevin0217168.github.io/Notes.github.io//favicon.ico?v=1590842888951">
+<link rel="stylesheet" href="https://kevin0217168.github.io/Notes.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="第一步：下载视频
+安装you-get
+
+注意：you-get需要python3+支持
+安装python后再通过pip安装
+注意更新老版本you-get，由于bilibili更改为BV号，导致旧版本无法下载，更新到最新版本即可
+
+pip in..." />
+    <meta name="keywords" content="生活" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://kevin0217168.github.io/Notes.github.io/">
+        <img src="https://kevin0217168.github.io/Notes.github.io//images/avatar.png?v=1590842888951" class="site-logo">
+        <h1 class="site-title">Kevin Notes</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://kevin0217168.github.io/Notes.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">如何从bilibili下载视频并提取音频</h2>
+            <div class="post-date">2020-05-30</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="第一步下载视频">第一步：下载视频</h2>
+<h3 id="安装you-get">安装you-get</h3>
+<blockquote>
+<p>注意：you-get需要python3+支持</p>
+<p>安装python后再通过pip安装</p>
+<p>注意更新老版本you-get，由于bilibili更改为BV号，导致旧版本无法下载，更新到最新版本即可</p>
+</blockquote>
+<pre><code class="language-batch">pip install youget
+</code></pre>
+<h3 id="you-get下载视频">you-get下载视频</h3>
+<pre><code class="language-batch">you-get [视频URL]
+</code></pre>
+<p>视频将会下载到当前目录下</p>
+<pre><code>C:\Users\xxx\Desktop&gt;you-get https://www.bilibili.com/video/BV1na4y1i7UG
+
+site:                Bilibili
+title:               《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌
+stream:
+    - format:        dash-flv
+      container:     mp4
+      quality:       高清 1080P
+      size:          12.4 MiB (12977506 bytes)
+    # download-with: you-get --format=dash-flv [URL]
+
+Downloading 《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌.mp4 ...
+ 100% ( 12.4/ 12.4MB) ├████████████████████████████████████████┤[2/2]    5 MB/s
+Merging video parts... Merged into 《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌.mp4
+
+Downloading 《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌.cmt.xml ...
+</code></pre>
+<p>加“-i”或“--info”可查看当前视频清晰度选项</p>
+<pre><code>C:\Users\xxx\Desktop&gt;you-get -i https://www.bilibili.com/video/BV1na4y1i7UG
+
+site:                Bilibili
+title:               《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌
+streams:             # Available quality and codecs
+    [ DASH ] ____________________________________
+    - format:        dash-flv
+      container:     mp4
+      quality:       高清 1080P
+      size:          12.4 MiB (12977506 bytes)
+    # download-with: you-get --format=dash-flv [URL]
+
+    - format:        dash-flv720
+      container:     mp4
+      quality:       高清 720P
+      size:          11.4 MiB (11931511 bytes)
+    # download-with: you-get --format=dash-flv720 [URL]
+
+    - format:        dash-flv480
+      container:     mp4
+      quality:       清晰 480P
+      size:          9.5 MiB (9953350 bytes)
+    # download-with: you-get --format=dash-flv480 [URL]
+
+    - format:        dash-flv360
+      container:     mp4
+      quality:       流畅 360P
+      size:          4.8 MiB (5016868 bytes)
+    # download-with: you-get --format=dash-flv360 [URL]
+
+    [ DEFAULT ] _________________________________
+    - format:        flv
+      container:     flv
+      quality:       高清 1080P
+      size:          16.1 MiB (16859450 bytes)
+    # download-with: you-get --format=flv [URL]
+
+    - format:        flv720
+      container:     flv
+      quality:       高清 720P
+      size:          14.5 MiB (15166090 bytes)
+    # download-with: you-get --format=flv720 [URL]
+
+    - format:        flv480
+      container:     flv
+      quality:       清晰 480P
+      size:          7.8 MiB (8179473 bytes)
+    # download-with: you-get --format=flv480 [URL]
+
+    - format:        flv360
+      container:     flv
+      quality:       流畅 360P
+      size:          4.9 MiB (5122667 bytes)
+    # download-with: you-get --format=flv360 [URL]
+
+
+</code></pre>
+<h2 id="第二步提取音频">第二步：提取音频</h2>
+<h3 id="使用ffmpeg">使用ffmpeg</h3>
+<blockquote>
+<p>ffmpeg 请从官网下载</p>
+<p>注意添加环境变量</p>
+</blockquote>
+<p>从视频中提取wav格式的音频</p>
+<pre><code>ffmpeg -i [rideo path] -f wav -ar 16000 [output path]
+</code></pre>
+<ul>
+<li>-i 输入视频路径</li>
+<li>-f wav 输出为wav格式的文件</li>
+<li>-ar 16000 采样率为16000</li>
+<li>[output path] 输出的文件名</li>
+</ul>
+<p>示例</p>
+<blockquote>
+<p>注意：若文件名中含有特殊字符，如空格等，需要用双引号括起文件名</p>
+</blockquote>
+<pre><code>C:\Users\xxx\Desktop&gt;ffmpeg -i &quot;《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌.mp4&quot; -f wav -ar 16000 《编程BUG之歌》.wav
+
+ffmpeg version git-2019-11-26-59d264b Copyright (c) 2000-2019 the FFmpeg developers
+  built with gcc 9.2.1 (GCC) 20191125
+  configuration: --enable-gpl --enable-version3 --enable-sdl2 --enable-fontconfig --enable-gnutls --enable-iconv --enable-libass --enable-libdav1d --enable-libbluray --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libopus --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libtheora --enable-libtwolame --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libzimg --enable-lzma --enable-zlib --enable-gmp --enable-libvidstab --enable-libvorbis --enable-libvo-amrwbenc --enable-libmysofa --enable-libspeex --enable-libxvid --enable-libaom --enable-libmfx --enable-ffnvcodec --enable-cuvid --enable-d3d11va --enable-nvenc --enable-nvdec --enable-dxva2 --enable-avisynth --enable-libopenmpt --enable-amf
+  libavutil      56. 36.100 / 56. 36.100
+  libavcodec     58. 62.100 / 58. 62.100
+  libavformat    58. 35.100 / 58. 35.100
+  libavdevice    58.  9.101 / 58.  9.101
+  libavfilter     7. 67.100 /  7. 67.100
+  libswscale      5.  6.100 /  5.  6.100
+  libswresample   3.  6.100 /  3.  6.100
+  libpostproc    55.  6.100 / 55.  6.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '銆婄紪绋婤UG涔嬫瓕銆?-- 灏嗙紪绋嬩腑閬囧埌鐨凚UG鍜屽紓甯稿啓鎴愪竴棣栨瓕.mp4':  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    encoder         : Lavf58.35.100
+    description     : Packed by Bilibili XCoder v2.0.2
+  Duration: 00:02:44.72, start: 0.000000, bitrate: 635 kb/s
+    Stream #0:0(und): Video: hevc (Main) (hev1 / 0x31766568), yuv420p(tv), 1920x1080 [SAR 1:1 DAR 16:9], 308 kb/s, 30 fps, 30 tbr, 16k tbn, 30 tbc (default)
+    Metadata:
+      handler_name    : VideoHandler
+    Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 317 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+Stream mapping:
+  Stream #0:1 -&gt; #0:0 (aac (native) -&gt; pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, wav, to '銆婄紪绋婤UG涔嬫瓕銆?wav':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    description     : Packed by Bilibili XCoder v2.0.2
+    ISFT            : Lavf58.35.100
+    Stream #0:0(und): Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, stereo, s16, 512 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+      encoder         : Lavc58.62.100 pcm_s16le
+size=   10295kB time=00:02:44.71 bitrate= 512.0kbits/s speed= 243x
+video:0kB audio:10295kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000740%
+</code></pre>
+<h2 id="完整示例">完整示例</h2>
+<pre><code># 下载视频
+you-get https://www.bilibili.com/video/BV1na4y1i7UG
+# 转换音频
+ffmpeg -i &quot;《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌.mp4&quot; -f wav -ar 16000 《编程BUG之歌》.wav
+</code></pre>
+<h2 id="集成批处理">集成批处理</h2>
+<p>使用Windows自带的Dos命令行编写批处理程序，将会方便很多</p>
+<h3 id="for-遍历指令">FOR 遍历指令</h3>
+<p>创建一个文本文件，将要下载的链接逐行放入，DOS使用for指令逐行提取并下载</p>
+<pre><code>for /f %variable in ([filename]) do ([command])
+</code></pre>
+<ul>
+<li>/f 文件操作</li>
+<li>%variable 要存入的临时变量</li>
+<li>[filename] 遍历的文件名</li>
+<li>[command] 执行的指令</li>
+</ul>
+<p>示例</p>
+<pre><code>C:\Users\xxx\Desktop&gt;for /f %i in (target.txt) do (@echo %i)
+
+https://www.bilibili.com/video/BV1na4y1i7UG
+https://www.bilibili.com/video/BV1na4y1i7UG
+https://www.bilibili.com/video/BV1na4y1i7UG
+https://www.bilibili.com/video/BV1na4y1i7UG
+</code></pre>
+<h3 id="批量下载">批量下载</h3>
+<pre><code>for /f %i in (target.txt) do (you-get %i)
+</code></pre>
+<h3 id="遍历文件名">遍历文件名</h3>
+<pre><code>for /r %variable in ([path]) do ([command])
+</code></pre>
+<ul>
+<li>
+<p>/r 递归目录操作</p>
+<ul>
+<li>
+<blockquote>
+<p>注意：相当于tree，列出目录下的所有文件</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>%variable 要存入的临时变量</p>
+</li>
+<li>
+<p>[path] 递归的目录</p>
+</li>
+<li>
+<p>[command] 执行的指令</p>
+</li>
+</ul>
+<p>示例</p>
+<pre><code>C:\Users\xxx\Desktop\音频下载&gt;for /r %i in (*.mp4) do (echo %i)
+
+C:\Users\xxx\Desktop\音频下载&gt;(echo C:\Users\xxx\Desktop\音频下载\《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌.mp4 )
+C:\Users\xxx\Desktop\音频下载\《编程BUG之歌》 -- 将编程中遇到的BUG和异常写成一首歌.mp4
+</code></pre>
+<h3 id="批量提取音频">批量提取音频</h3>
+<pre><code>for /r .\ %i in (*.mp4) do (ffmpeg -i &quot;%i&quot; -f wav -ar 16000 &quot;%i.wav&quot;)
+</code></pre>
+<h3 id="总程序">总程序</h3>
+<p>一气呵成，欧耶!</p>
+<pre><code>@echo off
+
+for /f %%i in (target.txt) do (echo [Kiven] Coming soon: %%i &amp;&amp; you-get %%i)
+
+for /r .\ %%i in (*.mp4) do (echo [Kiven] About to convert: %%i &amp;&amp; ffmpeg -i &quot;%%i&quot; -f wav -ar 16000 &quot;%%i.wav&quot;)
+
+del *.xml
+del *.mp4
+
+pause
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://kevin0217168.github.io/Notes.github.io/tag/cWU9X33B9/" class="tag">
+                    生活
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://kevin0217168.github.io/Notes.github.io/post/ying-yu-di-shi-er-ci-ke/">
+                  <h3 class="post-title">
+                    英语第十二次课
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
