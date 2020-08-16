@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Git 学习笔记 | Kevin Notes</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://kevin0217168.github.io/Notes.github.io//favicon.ico?v=1597542648094">
+<link rel="stylesheet" href="https://kevin0217168.github.io/Notes.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="init 初始化工作区
+配置用户名和邮箱
+git config --global user.name &quot;name&quot;
+git config --global user.email &quot;email&quot;
+
+Gi..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://kevin0217168.github.io/Notes.github.io/">
+        <img src="https://kevin0217168.github.io/Notes.github.io//images/avatar.png?v=1597542648094" class="site-logo">
+        <h1 class="site-title">Kevin Notes</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://kevin0217168.github.io/Notes.github.io/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      长风破浪会有时，直挂云帆济沧海。<br>
+为中华崛起而读书!
+    </div>
+    <div class="site-footer">
+      Written by <a href="https://github.com/Kevin0217168" target="_blank" style="text-decoration: underline;">Kevin</a> | <a class="rss" href="https://kevin0217168.github.io/Notes.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Git 学习笔记</h2>
+            <div class="post-date">2020-08-16</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="init-初始化工作区">init 初始化工作区</h2>
+<h2 id="配置用户名和邮箱">配置用户名和邮箱</h2>
+<pre><code>git config --global user.name &quot;name&quot;
+git config --global user.email &quot;email&quot;
+</code></pre>
+<h2 id="git中的忽略文件">Git中的忽略文件</h2>
+<ul>
+<li>.gitignore 在这个文件中可以设置要忽略的文件或目录，被忽略的文件或目录不会提交到仓库</li>
+<li>在.gitignore 中可以书写要忽略的文件或目录，以 / 开头，一行书写一个路径，这些路径所对应的文件或目录都会被忽略，不会提交到仓库</li>
+<li>写法</li>
+</ul>
+<pre><code>/.idea		    会忽略.idea文件
+/js		        会忽略js目录下的所有文件
+/js/*.js		会忽略js目录下的所有js文件
+</code></pre>
+<h2 id="add-添加文件到暂存区">add 添加文件到暂存区</h2>
+<ul>
+<li>直接填写要添加的文件名
+<ul>
+<li><code>git add [file]</code></li>
+</ul>
+</li>
+<li>提交工作区全部文件(均可)
+<ul>
+<li>
+<pre><code>git add .
+git add -A
+git add --all
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="status-查看工作区状态">status 查看工作区状态</h2>
+<pre><code>git status
+</code></pre>
+<h2 id="commit-将文件从暂存区提交">commit 将文件从暂存区提交</h2>
+<p>注意一定是从暂存区提交，未添加到暂存区中的文件不会提交</p>
+<pre><code>git commit -m &quot;单行描述文本&quot;
+
+// 将会跳转到vim填写多行描述文本
+git commit
+</code></pre>
+<h3 id="做些小修改-重提交">做些小修改--重提交</h3>
+<pre><code>重新提交，不产生新的提交记录，在原提交记录上更改
+commit --amend
+</code></pre>
+<h2 id="log-查看提交历史">log 查看提交历史</h2>
+<p>将会从时间近到远列出提交历史及描述</p>
+<pre><code>git log
+</code></pre>
+<h3 id="查看简略版的日志">查看简略版的日志</h3>
+<pre><code>git log --online
+</code></pre>
+<h2 id="branch-创建删除分支">branch 创建/删除分支</h2>
+<h3 id="创建分支">创建分支</h3>
+<p>此方法并不会切换分支！切换分支请使用checkout</p>
+<pre><code>git branch [新分支名]
+</code></pre>
+<h3 id="删除分支">删除分支</h3>
+<pre><code>git breanch -d dev		回到master分支，执行删除分支命令，删除dev分支
+</code></pre>
+<h3 id="强制移动分支">强制移动分支</h3>
+<pre><code>git breanch -f master HEAD~3 强制将master分支移动到HEAD后3个节点
+</code></pre>
+<h2 id="checkout-切换分支">checkout 切换分支</h2>
+<pre><code>git checkout [目标分支名]
+</code></pre>
+<h3 id="创建一个分支并切换到该分支">创建一个分支并切换到该分支</h3>
+<pre><code>git checkout -b [新分支名]
+</code></pre>
+<h3 id="移动head">移动HEAD</h3>
+<h4 id="绝对引用">绝对引用</h4>
+<pre><code>git checkout [哈希值/分支名/标签名]
+</code></pre>
+<h4 id="相对引用">相对引用</h4>
+<pre><code>git checkout HEAD^    跳转到HEAD的上一个节点
+git checkout HEAD^^   跳转到HEAD的上上一个节点
+</code></pre>
+<h5 id="简略相对引用">简略相对引用</h5>
+<pre><code>git checkout HEAD~4      HEAD向后退4个节点
+== git checkout HEAD^^^^
+</code></pre>
+<h5 id="两个父节点">两个父节点</h5>
+<pre><code>当出现有两个父节点时
+git checkout HEAD^  默认退到第一个父节点
+git checkout HEAD^2 退到第二个父节点
+</code></pre>
+<h4 id="复合运用">复合运用</h4>
+<pre><code>git checkout HEAD~^2~2
+
+== git checkout HEAD~   HEAD向后退1个节点
+git checkout HEAD^2     退到第二个父节点
+git checkout HEAD~2     后退2个节点
+</code></pre>
+<h2 id="merge-合并分支">merge 合并分支</h2>
+<pre><code>在master分支上(把别人拉过来)
+git merge dev
+如果有冲突，还需要手动处理，处理后再提交一次
+ 
+        |master*
+        |
+        |
+     ————————
+  dev|      |
+     ---    |
+       ---  |
+         ---|dev&amp;master*
+</code></pre>
+<h2 id="rebase-合并分支线性复制">rebase 合并分支(线性复制)</h2>
+<pre><code>在被合并的分支上(与merge相反，把自己复制过去)
+git rebase master
+
+           |master
+           |
+           |
+     ------------
+     |          |
+     |          |master
+dev1*| --复制---&gt;|dev2*
+</code></pre>
+<h3 id="gui形式">GUI形式</h3>
+<p>会弹出一个交互窗口，一般为vim</p>
+<p>可以操作记录提交的顺序、不提交哪些记录、合并提交某些记录</p>
+<pre><code>git rebase -i [分支名]
+</code></pre>
+<h2 id="reset-回退到指定的版本不可远程提交">reset 回退到指定的版本(不可远程提交)</h2>
+<p>改写历史式，将HEAD及分支整体后退，忽略之前的版本</p>
+<p>“改写历史”的方法对大家一起使用的远程分支是无效的哦！</p>
+<pre><code>git reset --hard HEAD~0		      回退到上一次提交代码的状态
+git reset --hard HEAD~1		      回退到上上次提交代码的状态
+git reset --hard HEAD [版本号]		回退到指定版本号
+git reflog		                  可以查看每一次切换版本的记录以及所有的版本号
+</code></pre>
+<h2 id="revert-将指定的版本复制提交可用于远程分支">revert 将指定的版本复制提交(可用于远程分支)</h2>
+<pre><code>git revert HEAD^  将上一个节点复制到前面并提交
+     C0
+     |
+     C1---|
+     |    |
+dev  C2   |复制
+     |    |
+dev' C1'--|
+     |
+</code></pre>
+<h2 id="cherry-pick-抓取指定节点复制到该分支上">cherry-pick 抓取指定节点复制到该分支上</h2>
+<pre><code>git cherry-pick [哈希值...]
+在master分支上
+git cherry-pick C3 C5
+
+             |
+             C1
+     ---------------
+     C2     C4     C6
+     |      |      |
+     C3     C5     C7
+     |      |       |
+     |----复制-----&gt;C3'
+            |       |
+            -复制--&gt;C5'
+</code></pre>
+<h2 id="tag-标签里程碑">tag 标签/里程碑</h2>
+<p>标签并不会因为分支的移动而变化，是一个始终固定的锚点</p>
+<p>可直接通过标签引用节点，每一个标签都是唯一的</p>
+<pre><code>若不填节点引用，标签默认在HEAD上
+git tag [标签名] [哈希值(节点引用)]
+</code></pre>
+<h2 id="describe">describe</h2>
+<pre><code>git describe 
+</code></pre>
+<p>可以是任何能被 Git 识别成提交记录的引用，如果你没有指定的话，Git 会以你目前所检出的位置（<code>HEAD</code>）。</p>
+<p>它输出的结果是这样的：</p>
+<pre><code>&lt;tag&gt;_&lt;numCommits&gt;_g&lt;hash&gt;
+</code></pre>
+<p><code>tag</code> 表示的是离 <code>ref</code> 最近的标签， <code>numCommits</code> 是表示这个 <code>ref</code> 与 <code>tag</code> 相差有多少个提交记录， <code>hash</code> 表示的是你所给定的 <code>ref</code> 所表示的提交记录哈希值的前几位。</p>
+<p>当 <code>ref</code> 提交记录上有某个标签时，则只输出标签名称</p>
+<h2 id="远程仓库">远程仓库</h2>
+<h3 id="clone-将远程仓库的代码拷贝到本地">clone 将远程仓库的代码拷贝到本地</h3>
+<pre><code>git clone [地址]
+</code></pre>
+<h3 id="fetch-从远程仓库下载本地仓库中缺失的提交记录">fetch 从远程仓库下载本地仓库中缺失的提交记录</h3>
+<ul>
+<li>并更新远程分支指针(如 <code>o/master</code>)</li>
+<li>并不会改变本地仓库的状态。它不会更新你的 <code>master</code> 分支，也不会修改你磁盘上的文件。</li>
+</ul>
+<h3 id="pull-合并远程分支同步云端更改">pull 合并远程分支，同步云端更改</h3>
+<p><code>git pull</code> 就是 git fetch 和 git merge <just-fetched-branch> 的缩写！</p>
+<pre><code>git fetch
+git merge o/master
+== git pull
+</code></pre>
+<p><code>git pull --rebase</code> 是 fetch 和 rebase 的简写！</p>
+<pre><code>git pull --rebase
+== git fetch
+git rebase o/master
+</code></pre>
+<h3 id="push-上传到远程仓库并在远程仓库上合并本地提交">push 上传到远程仓库，并在远程仓库上合并本地提交</h3>
+<p>上传最新节点，远程仓库中的 <code>master</code> 分支也被更新到指向最新节点了，我们的远程分支 (o/master) 也同样被更新了。所有的分支都同步了！</p>
+<pre><code>git push
+</code></pre>
+<h3 id="冲突">冲突</h3>
+<p>假设你周一克隆了一个仓库，然后开始研发某个新功能。到周五时，你新功能开发测试完毕，可以发布了。但是 —— 天啊！你的同事这周写了一堆代码，还改了许多你的功能中使用的 API，这些变动会导致你新开发的功能变得不可用。但是他们已经将那些提交推送到远程仓库了，因此你的工作就变成了基于项目<strong>旧版</strong>的代码，与远程仓库最新的代码不匹配了。</p>
+<p>这种情况下, <code>git push</code> 就不知道该如何操作了。如果你执行 <code>git push</code>，Git 应该让远程仓库回到星期一那天的状态吗？还是直接在新代码的基础上添加你的代码，异或由于你的提交已经过时而直接忽略你的提交？</p>
+<p>因为这情况（历史偏离）有许多的不确定性，Git 是不会允许你 <code>push</code> 变更的。实际上它会强制你<strong>先合并远程最新的代码</strong>，然后才能分享你的工作。</p>
+<h3 id="跟踪远程分支">跟踪远程分支</h3>
+<h4 id="checkout">checkout</h4>
+<pre><code>git checkout -b totallyNotMaster o/master
+</code></pre>
+<p>就可以创建一个名为 <code>totallyNotMaster</code> 的分支，它跟踪远程分支 <code>o/master</code>。</p>
+<h4 id="branch">branch</h4>
+<p>另一种设置远程追踪分支的方法就是使用：<code>git branch -u</code> 命令，执行：</p>
+<pre><code>git branch -u o/master foo
+</code></pre>
+<p>这样 <code>foo</code> 就会跟踪 <code>o/master</code> 了。如果当前就在 foo 分支上, 还可以省略 foo：</p>
+<pre><code>git branch -u o/master
+</code></pre>
+<h3 id=""></h3>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://kevin0217168.github.io/Notes.github.io/post/ru-he-cong-bilibili-xia-zai-shi-pin-bing-ti-qu-yin-pin/">
+                  <h3 class="post-title">
+                    如何从bilibili下载视频并提取音频
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'b58f86146dc165a0a44a',
+        clientSecret: 'dce848b64fc3f2371ed98d032bd19784ea41c703',
+        repo: 'Notes.github.io',
+        owner: 'Kevin0217168',
+        admin: ['Kevin0217168'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
